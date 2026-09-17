@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>HRM Pro Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<div id="loader" aria-label="Loading HRM Dashboard" role="status">
+
+    <div class="spinner"></div>
+
+    <h2>Loading HRM Dashboard...</h2>
+
+</div>
+
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+
+<header>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<i class="fa-solid fa-users"></i>
+
+<span>HRM Pro</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="#">Dashboard</a></li>
+
+<li><a href="#">Employees</a></li>
+
+<li><a href="#">Attendance</a></li>
+
+<li><a href="#">Payroll</a></li>
+
+<li><a href="#">Reports</a></li>
+
+</ul>
+
+<div class="nav-right">
+
+<button class="theme-btn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-left">
+
+<h1>
+
+Smart Human Resource
+
+<span>Management System</span>
+
+</h1>
+
+<p>
+
+Manage employees, attendance, payroll and performance from one modern dashboard.
+
+</p>
+
+<button class="hero-btn">
+
+Get Started
+
+</button>
+
+</div>
+
+<div class="hero-right">
+
+<div class="dashboard-preview">
+
+<h2>Today's Summary</h2>
+
+<p>👨 Employees : 150</p>
+
+<p>✅ Present : 135</p>
+
+<p>🏖 Leave : 12</p>
+
+<p>💰 Payroll : ₹8.2 L</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+            DASHBOARD STATS
+========================================== -->
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <div class="icon blue">
+
+            <i class="fa-solid fa-users"></i>
+
+        </div>
+
+        <h2 id="employeeCount">150</h2>
+
+        <p>Total Employees</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="icon green">
+
+            <i class="fa-solid fa-user-check"></i>
+
+        </div>
+
+        <h2 id="presentCount">135</h2>
+
+        <p>Present Today</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="icon orange">
+
+            <i class="fa-solid fa-calendar-xmark"></i>
+
+        </div>
+
+        <h2 id="leaveCount">12</h2>
+
+        <p>On Leave</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="icon purple">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+        </div>
+
+        <h2 id="payrollCount">₹8.2L</h2>
+
+        <p>Monthly Payroll</p>
+
+    </div>
+
+</section>
+<!-- ==========================================
+            EMPLOYEE MANAGEMENT
+========================================== -->
+
+<section class="employees">
+
+    <div class="section-title">
+
+        <h2>Employee Management</h2>
+
+        <p>Manage all employees from one place.</p>
+
+    </div>
+
+    <div class="employee-top">
+
+        <input
+            type="text"
+            id="searchEmployee"
+            placeholder="🔍 Search Employee..."
+        >
+
+        <button id="addEmployeeBtn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Employee
+
+        </button>
+
+    </div>
+
+    <div class="export-buttons">
+
+        <button id="exportPDF">
+
+            <i class="fa-solid fa-file-pdf"></i>
+
+            Export PDF
+
+        </button>
+
+        <button id="exportExcel">
+
+            <i class="fa-solid fa-file-excel"></i>
+
+            Export Excel
+
+        </button>
+
+    </div>
+
+    <div class="filters">
+
+        <select id="departmentFilter">
+
+            <option value="">All Departments</option>
+
+        </select>
+
+        <select id="statusFilter">
+
+            <option value="">All Status</option>
+            <option>Present</option>
+            <option>Leave</option>
+            <option>Absent</option>
+
+        </select>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Department</th>
+
+                    <th>Position</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="employeeTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            LEAVE MANAGEMENT
+========================================== -->
+
+<section class="leave-section">
+
+    <div class="section-title">
+
+        <h2>Leave Management</h2>
+
+        <p>Manage Employee Leave Requests</p>
+
+    </div>
+
+    <div class="leave-top">
+
+        <button id="leaveBtn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Apply Leave
+
+        </button>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Employee</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="leaveTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            DEPARTMENT MANAGEMENT
+========================================== -->
+
+<section class="departments">
+
+    <div class="section-title">
+
+        <h2>Department Management</h2>
+
+        <p>Manage Company Departments</p>
+
+    </div>
+
+    <div class="department-top">
+
+        <input
+            type="text"
+            id="departmentSearch"
+            placeholder="Search Department..."
+        >
+
+        <button id="addDepartmentBtn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Department
+
+        </button>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Department</th>
+                    <th>Manager</th>
+                    <th>Employees</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="departmentTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            ANALYTICS DASHBOARD
+========================================== -->
+
+<section class="analytics">
+
+    <div class="section-title">
+
+        <h2>Analytics Dashboard</h2>
+
+        <p>HR Insights &amp; Reports</p>
+
+    </div>
+
+    <div class="chart-grid">
+
+        <div class="chart-card">
+
+            <h3>Employees by Department</h3>
+
+            <canvas id="departmentChart"></canvas>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Employee Status</h3>
+
+            <canvas id="statusChart"></canvas>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Monthly Hiring</h3>
+
+            <canvas id="hiringChart"></canvas>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h3>Payroll Growth</h3>
+
+            <canvas id="payrollChart"></canvas>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            NOTIFICATIONS
+========================================== -->
+
+<section class="notifications">
+
+    <div class="section-title">
+
+        <h2>Notifications</h2>
+
+        <p>Recent HR Activities</p>
+
+    </div>
+
+    <div class="notification-list" id="notificationList">
+
+        <div class="notification-item">
+
+            <i class="fa-solid fa-bell"></i>
+
+            <div>
+                <h4>Welcome!</h4>
+                <p>HRM System initialized successfully.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            ATTENDANCE CALENDAR
+========================================== -->
+
+<section class="calendar-section">
+
+    <div class="section-title">
+
+        <h2>Attendance Calendar</h2>
+
+        <p>Track Employee Attendance</p>
+
+    </div>
+
+    <div class="calendar-card">
+
+        <div class="calendar-header">
+
+            <button id="prevMonth" aria-label="Previous month">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <h2 id="monthYear"></h2>
+
+            <button id="nextMonth" aria-label="Next month">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
+
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+
+        <div id="calendar"></div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            EMAIL NOTIFICATION UI
+========================================== -->
+
+<section class="email-section">
+
+    <div class="section-title">
+
+        <h2>Email Employees</h2>
+
+        <p>Send HR Notifications</p>
+
+    </div>
+
+    <div class="email-card">
+
+        <input type="email" id="emailTo" placeholder="Employee Email" required>
+        <input type="text" id="emailSubject" placeholder="Subject" required>
+        <textarea id="emailMessage" placeholder="Write your message..." required></textarea>
+
+        <button id="sendEmail">Send Email</button>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+            ADD EMPLOYEE MODAL
+========================================== -->
+
+<div class="modal" id="employeeModal">
+
+    <div class="modal-content">
+
+        <span class="close-modal">&times;</span>
+
+        <h2 id="modalTitle">Add Employee</h2>
+
+        <form id="employeeForm">
+
+            <input
+                type="text"
+                id="empName"
+                placeholder="Employee Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="empDepartment"
+                placeholder="Department"
+                required
+            >
+
+            <input
+                type="text"
+                id="empPosition"
+                placeholder="Position"
+                required
+            >
+
+            <select id="empStatus">
+
+                <option>Present</option>
+
+                <option>Leave</option>
+
+                <option>Absent</option>
+
+            </select>
+
+            <label>Employee Profile Photo</label>
+
+            <input
+                type="file"
+                id="empImage"
+                accept="image/*"
+            >
+
+            <button type="submit">
+
+                Add Employee
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div id="toast">
+Employee Added Successfully
+</div>
+
+<div class="modal" id="leaveModal">
+
+    <div class="modal-content">
+
+        <span class="closeLeave">&times;</span>
+
+        <h2>Apply Leave</h2>
+
+        <form id="leaveForm">
+
+            <input
+                type="text"
+                id="leaveEmployee"
+                placeholder="Employee Name"
+                required
+            >
+
+            <input
+                type="date"
+                id="leaveFrom"
+                required
+            >
+
+            <input
+                type="date"
+                id="leaveTo"
+                required
+            >
+
+            <textarea
+                id="leaveReason"
+                placeholder="Reason"
+                required
+            ></textarea>
+
+            <button type="submit">
+
+                Submit Request
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal" id="departmentModal">
+
+    <div class="modal-content">
+
+        <span class="closeDepartment">&times;</span>
+
+        <h2 id="departmentTitle">Add Department</h2>
+
+        <form id="departmentForm">
+
+            <input
+                type="text"
+                id="departmentName"
+                placeholder="Department Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="departmentManager"
+                placeholder="Manager Name"
+                required
+            >
+
+            <input
+                type="number"
+                id="departmentEmployees"
+                placeholder="Number of Employees"
+                min="0"
+                required
+            >
+
+            <button type="submit">
+
+                Save Department
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+            ATTENDANCE MANAGEMENT
+========================================== -->
+
+<section class="attendance">
+
+    <div class="section-title">
+
+        <h2>Attendance Management</h2>
+
+        <p>Today's Attendance Overview</p>
+
+    </div>
+
+    <div class="attendance-grid">
+
+        <div class="attendance-card">
+
+            <i class="fa-solid fa-user-check"></i>
+
+            <h3>Present</h3>
+
+            <h2 id="presentEmployee">135</h2>
+
+        </div>
+
+        <div class="attendance-card">
+
+            <i class="fa-solid fa-user-clock"></i>
+
+            <h3>Late</h3>
+
+            <h2>8</h2>
+
+        </div>
+
+        <div class="attendance-card">
+
+            <i class="fa-solid fa-user-xmark"></i>
+
+            <h3>Absent</h3>
+
+            <h2>7</h2>
+
+        </div>
+
+        <div class="attendance-card">
+
+            <i class="fa-solid fa-plane-departure"></i>
+
+            <h3>On Leave</h3>
+
+            <h2 id="leaveEmployeeCount">12</h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="payroll">
+
+<div class="section-title">
+
+<h2>Payroll Overview</h2>
+
+<p>Monthly Salary Details</p>
+
+</div>
+
+<div class="payroll-container">
+
+<div class="pay-card">
+
+<h3>Total Payroll</h3>
+
+<h1>₹8.2 Lakh</h1>
+
+</div>
+
+<div class="pay-card">
+
+<h3>Bonus Paid</h3>
+
+<h1>₹80,000</h1>
+
+</div>
+
+<div class="pay-card">
+
+<h3>Deductions</h3>
+
+<h1>₹25,000</h1>
+
+</div>
+
+<div class="pay-card">
+
+<h3>Net Payroll</h3>
+
+<h1>₹7.95 Lakh</h1>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="performance">
+
+<div class="section-title">
+
+<h2>Performance Overview</h2>
+
+<p>Employee Productivity</p>
+
+</div>
+
+<canvas id="performanceChart"></canvas>
+
+</section>
+
+<footer>
+
+<h2>HRM Pro Dashboard</h2>
+
+<p>
+
+© 2026 All Rights Reserved
+
+</p>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

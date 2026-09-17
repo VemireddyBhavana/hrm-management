@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRM Pro Login</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="login-page">
+
+<div class="login-container">
+
+    <div class="login-brand">
+        <i class="fa-solid fa-users"></i>
+        <span>HRM PRO</span>
+    </div>
+
+    <h1>Welcome back</h1>
+    <p>Sign in to manage your workforce.</p>
+
+    <form id="loginForm">
+
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@company.com" required>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password" required>
+
+        <label for="role">Role</label>
+        <select id="role">
+            <option>Admin</option>
+            <option>Employee</option>
+        </select>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit",(event)=>{
+
+    event.preventDefault();
+
+    localStorage.setItem("userRole",document.getElementById("role").value);
+    localStorage.setItem("isLoggedIn","true");
+
+    window.location.href="index.html";
+
+});
+
+</script>
+
+</body>
+
+</html>
